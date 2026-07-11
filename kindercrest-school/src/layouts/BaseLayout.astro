@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Kindercrest School | Nurturing every child in our care',
+  description = 'Kindercrest School is a nurturing learning community in Lifecamp, Abuja, supporting children from creche through grade school.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#071a46" />
+    <link rel="icon" href="/assets/logo/kclogo.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <slot />
+    </div>
+  </body>
+</html>

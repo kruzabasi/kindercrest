@@ -1,0 +1,70 @@
+---
+import { getMailtoHref, mailSubjects } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="admissions" id="admissions" aria-labelledby="admissions-title">
+  <div class="container admissions__grid">
+    <div>
+      <h2 class="section-title" id="admissions-title">We welcome students all year round.</h2>
+    </div>
+    <div class="admissions__copy">
+      <p>
+        Book a school tour or trial day to experience Kindercrest firsthand.
+      </p>
+      <div class="admissions__actions">
+        <a class="button button--primary" href={getMailtoHref(mailSubjects.admissions)}>
+          Book Your Visit
+          <Icon name="arrow" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .admissions {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    color: var(--kc-ink);
+    background: var(--kc-white);
+  }
+
+  .admissions__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.42fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: center;
+    border-top: 1px solid var(--kc-line);
+    border-bottom: 1px solid var(--kc-line);
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+
+  .admissions .section-title {
+    max-width: 760px;
+    color: var(--kc-ink);
+    font-family: var(--font-body);
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .admissions__copy p {
+    max-width: 340px;
+    margin: 0;
+    color: var(--kc-muted);
+    font-size: 1rem;
+  }
+
+  .admissions__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 820px) {
+    .admissions__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

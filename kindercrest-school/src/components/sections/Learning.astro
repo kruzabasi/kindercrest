@@ -1,0 +1,312 @@
+---
+import { programmes } from '../../data/site';
+---
+
+<section class="learning" id="learning" aria-labelledby="learning-title">
+  <div class="container learning__shell">
+    <div class="learning__intro">
+      <p class="learning__eyebrow">Learning at Kindercrest</p>
+      <h2 id="learning-title">A steady path from early care to confident learning.</h2>
+      <p>
+        From attentive early care to confident grade school learning, each stage is designed around safety,
+        rhythm, discovery, and strong foundations.
+      </p>
+    </div>
+
+    <div class="programme-list" aria-label="Kindercrest learning stages">
+      {
+        programmes.map((programme) => (
+          <article class:list={['programme-card', `programme-card--${programme.accent}`]}>
+            <div class="programme-card__media">
+              <img
+                src={programme.image}
+                alt={programme.imageAlt}
+                width="2560"
+                height="1707"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="programme-card__body">
+              <div class="programme-card__heading">
+                <p>{programme.ages}</p>
+                <h3>{programme.title}</h3>
+              </div>
+
+              <p class="programme-card__copy">{programme.description}</p>
+
+              <div class="programme-card__footer">
+                <span>{programme.hours}</span>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .learning {
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+    color: var(--kc-ink);
+    font-family: var(--font-body);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 100%) 0%, rgb(247 248 250 / 100%) 100%);
+  }
+
+  .learning__shell {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  .learning__intro {
+    position: sticky;
+    top: 2rem;
+    max-width: 470px;
+    padding-left: 1.45rem;
+  }
+
+  .learning__intro::before {
+    position: absolute;
+    top: 0.1rem;
+    left: 0;
+    width: 0.32rem;
+    height: 3.9rem;
+    border-radius: 999px;
+    background:
+      linear-gradient(
+        180deg,
+        var(--kc-sky) 0 18%,
+        var(--kc-green) 18% 38%,
+        var(--kc-gold) 38% 58%,
+        var(--kc-magenta) 58% 80%,
+        var(--kc-orange) 80% 100%
+      );
+    content: '';
+    box-shadow: 0 0 0 5px rgb(255 255 255 / 82%);
+  }
+
+  .learning__eyebrow {
+    margin: 0 0 0.85rem;
+    color: var(--kc-sky);
+    font-size: 0.8rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .learning h2 {
+    margin: 0;
+    color: var(--kc-navy);
+    font-size: clamp(3rem, 5.8vw, 4.55rem);
+    font-weight: 620;
+    letter-spacing: 0;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .learning__intro > p:last-child {
+    max-width: 390px;
+    margin: 1.25rem 0 0;
+    color: var(--kc-muted);
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .programme-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .programme-card {
+    --card-accent: var(--kc-sky);
+
+    display: grid;
+    grid-template-columns: minmax(220px, 0.64fr) minmax(0, 1fr);
+    min-height: 270px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--kc-ink) 12%, white);
+    border-radius: 8px;
+    background: rgb(255 255 255 / 86%);
+    box-shadow: 0 14px 34px rgb(16 24 40 / 7%);
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .programme-card:hover {
+    border-color: color-mix(in srgb, var(--card-accent) 48%, white);
+    box-shadow: 0 18px 42px rgb(16 24 40 / 10%);
+    transform: translateY(-2px);
+  }
+
+  .programme-card__media {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    background: var(--kc-paper);
+  }
+
+  .programme-card__media::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(7 26 70 / 6%) 0%, rgb(7 26 70 / 28%) 100%);
+    content: '';
+  }
+
+  .programme-card__media img {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    transition: transform 260ms ease;
+  }
+
+  .programme-card:hover .programme-card__media img {
+    transform: scale(1.025);
+  }
+
+  .programme-card__body {
+    display: grid;
+    min-height: 100%;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(1rem, 2.4vw, 1.4rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .programme-card__heading p {
+    margin: 0 0 0.5rem;
+    color: var(--card-accent);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .programme-card h3 {
+    margin: 0;
+    color: var(--kc-navy);
+    font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+    font-weight: 680;
+    letter-spacing: 0;
+    line-height: 1.04;
+  }
+
+  .programme-card__copy {
+    max-width: 620px;
+    margin: 0;
+    color: color-mix(in srgb, var(--kc-ink) 72%, white);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .programme-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.85rem;
+    border-top: 1px solid color-mix(in srgb, var(--kc-ink) 10%, white);
+    padding-top: 1rem;
+  }
+
+  .programme-card__footer span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--kc-ink);
+    font-size: 0.9rem;
+    font-weight: 680;
+    line-height: 1.15;
+  }
+
+  .programme-card--sky {
+    --card-accent: var(--kc-sky);
+  }
+
+  .programme-card--green {
+    --card-accent: var(--kc-green);
+  }
+
+  .programme-card--gold {
+    --card-accent: var(--kc-gold);
+  }
+
+  @media (max-width: 960px) {
+    .learning__shell {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .learning__intro {
+      position: static;
+      max-width: 720px;
+    }
+
+    .programme-card {
+      grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .learning__shell {
+      gap: 2rem;
+    }
+
+    .learning__intro {
+      padding-left: 1rem;
+    }
+
+    .learning__intro::before {
+      width: 0.25rem;
+      height: 3.1rem;
+    }
+
+    .learning h2 {
+      font-size: 2.15rem;
+      line-height: 1.05;
+    }
+
+    .learning__intro > p:last-child {
+      margin-top: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .programme-list {
+      gap: 0.85rem;
+    }
+
+    .programme-card {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .programme-card__media {
+      min-height: 230px;
+      aspect-ratio: 16 / 10;
+    }
+
+    .programme-card__body {
+      min-height: auto;
+      gap: 1rem;
+      padding: 1.15rem;
+    }
+
+    .programme-card__footer {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .programme-card,
+    .programme-card__media img {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>

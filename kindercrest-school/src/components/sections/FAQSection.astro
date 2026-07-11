@@ -1,0 +1,184 @@
+---
+import { contact, faqs, getMailtoHref, mailSubjects } from '../../data/site';
+import FAQAccordion from '../islands/FAQAccordion.svelte';
+
+const questionTopics = ['Progress', 'Safety', 'Admissions', 'Learning support'];
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="container faq__shell">
+    <div class="faq__intro">
+      <p class="faq__eyebrow">Parent Questions</p>
+      <h2 id="faq-title">Questions families ask before visiting.</h2>
+      <p>
+        These answers cover the practical questions families usually ask before visiting Kindercrest. If there is
+        anything more specific you would like to discuss, please email{' '}
+        <a href={getMailtoHref(mailSubjects.parentQuestion)}>{contact.email}</a>.
+      </p>
+
+      <ul class="faq__topics" aria-label="Question topics">
+        {
+          questionTopics.map((topic) => (
+            <li>
+              <span aria-hidden="true"></span>
+              {topic}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="faq__questions">
+      <FAQAccordion faqs={faqs} client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding-block: clamp(4.5rem, 8vw, 7rem);
+    color: var(--kc-ink);
+    font-family: var(--font-body);
+    background:
+      linear-gradient(180deg, rgb(247 248 250 / 100%) 0%, rgb(255 255 255 / 100%) 72%);
+  }
+
+  .faq__shell {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  .faq__intro {
+    position: sticky;
+    top: 2rem;
+    max-width: 440px;
+  }
+
+  .faq__eyebrow {
+    margin: 0 0 0.85rem;
+    color: var(--kc-sky);
+    font-size: 0.8rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .faq h2 {
+    margin: 0;
+    color: var(--kc-navy);
+    font-family: var(--font-body);
+    font-size: clamp(3rem, 5.8vw, 4.55rem);
+    font-weight: 620;
+    letter-spacing: 0;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .faq__intro > p {
+    max-width: 390px;
+    margin: 1.25rem 0 0;
+    color: var(--kc-muted);
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .faq__intro > p a {
+    color: var(--kc-royal);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--kc-royal) 28%, transparent);
+    text-underline-offset: 0.24em;
+    transition:
+      color 160ms ease,
+      text-decoration-color 160ms ease;
+  }
+
+  .faq__intro > p a:hover,
+  .faq__intro > p a:focus-visible {
+    color: var(--kc-navy);
+    text-decoration-color: currentColor;
+  }
+
+  .faq__topics {
+    display: flex;
+    max-width: 390px;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.9rem;
+    margin: 1.55rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .faq__topics li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    color: var(--kc-ink);
+    font-size: 0.85rem;
+    font-weight: 680;
+    line-height: 1.1;
+  }
+
+  .faq__topics li span {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--topic-color, var(--kc-sky));
+  }
+
+  .faq__topics li:nth-child(2) span {
+    --topic-color: var(--kc-green);
+  }
+
+  .faq__topics li:nth-child(3) span {
+    --topic-color: var(--kc-gold);
+  }
+
+  .faq__topics li:nth-child(4) span {
+    --topic-color: var(--kc-magenta);
+  }
+
+  .faq__questions {
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .faq__shell {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .faq__intro {
+      position: static;
+      max-width: 680px;
+    }
+
+    .faq h2 {
+      font-size: 2.55rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .faq__shell {
+      gap: 2rem;
+      padding-top: 1.6rem;
+    }
+
+    .faq h2 {
+      font-size: 2.15rem;
+      line-height: 1.05;
+    }
+
+    .faq__intro > p {
+      margin-top: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .faq__topics {
+      margin-top: 1.25rem;
+    }
+  }
+</style>

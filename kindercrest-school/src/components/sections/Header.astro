@@ -1,0 +1,295 @@
+---
+import MobileMenu from '../islands/MobileMenu.svelte';
+import { contact, navGroups, routes } from '../../data/site';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isContactPage = currentPath === routes.contact;
+const isActiveNavItem = (href: string, index: number) => (isContactPage ? href === routes.contact : index === 0);
+const activeHref = isContactPage ? routes.contact : routes.home;
+---
+
+<header class="site-header" aria-label="Site header">
+  <div class="header__bar">
+    <a class="brand" href="/" aria-label="Kindercrest School home">
+      <img src="/assets/logo/whitekclogo.png" alt="" width="688" height="688" />
+      <span>{contact.schoolName}</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {
+        navGroups.map((item, index) => (
+          <div class="desktop-nav__group">
+            <a class:list={{ 'desktop-nav__link': true, 'is-active': isActiveNavItem(item.href, index) }} href={item.href}>
+              {item.label}
+            </a>
+            {
+              item.children && (
+                <div class="desktop-nav__submenu" aria-label={`${item.label} links`}>
+                  {item.children.map((child) => (
+                    <a href={child.href}>{child.label}</a>
+                  ))}
+                </div>
+              )
+            }
+          </div>
+        ))
+      }
+    </nav>
+
+    <a class="header__cta" href={routes.admissions}>Book a Visit</a>
+
+    <div class="header__mobile">
+      <MobileMenu navGroups={navGroups} activeHref={activeHref} client:load />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    right: 0;
+    left: 0;
+    color: var(--kc-white);
+    font-family: var(--font-body);
+    pointer-events: none;
+  }
+
+  .header__bar {
+    position: relative;
+    display: flex;
+    width: min(1920px, calc(100% - (clamp(1.4rem, 3.6vw, 5.6rem) * 2)));
+    min-height: clamp(118px, 12vw, 190px);
+    align-items: flex-start;
+    gap: clamp(1rem, 2.4vw, 2.7rem);
+    margin-inline: auto;
+    padding: clamp(1.45rem, 3vw, 2.8rem) 0 0;
+    pointer-events: auto;
+  }
+
+  .site-header :is(a, button) {
+    pointer-events: auto;
+  }
+
+  .brand {
+    display: inline-flex;
+    min-width: max-content;
+    align-items: flex-start;
+    color: var(--kc-white);
+  }
+
+  .brand img {
+    width: clamp(116px, 10.3vw, 172px);
+    height: auto;
+    filter: drop-shadow(0 12px 22px rgb(0 0 0 / 18%));
+  }
+
+  .brand span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .desktop-nav {
+    position: absolute;
+    top: clamp(6.55rem, 14vh, 9.6rem);
+    right: 0;
+    display: grid;
+    width: clamp(142px, 10vw, 184px);
+    gap: clamp(1rem, 2.15vh, 1.55rem);
+    color: var(--kc-white);
+  }
+
+  .desktop-nav::before {
+    position: absolute;
+    top: -2.15rem;
+    right: 0;
+    width: min(52vw, 980px);
+    height: 1px;
+    background: rgb(255 255 255 / 54%);
+    content: '';
+  }
+
+  .desktop-nav__group {
+    position: relative;
+    display: grid;
+    width: 100%;
+    justify-items: end;
+    text-align: right;
+  }
+
+  .desktop-nav__link {
+    position: relative;
+    display: inline-flex;
+    min-height: 0;
+    align-items: center;
+    padding: 0;
+    color: var(--kc-white);
+    font-size: clamp(0.95rem, 1.1vw, 1.18rem);
+    font-weight: 430;
+    letter-spacing: 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+    transition: opacity 160ms ease;
+  }
+
+  .desktop-nav__link::after {
+    position: absolute;
+    bottom: -0.32em;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms ease;
+  }
+
+  .desktop-nav__link:hover,
+  .desktop-nav__link:focus-visible,
+  .desktop-nav__link.is-active {
+    color: var(--kc-white);
+    opacity: 0.9;
+  }
+
+  .desktop-nav__link:hover::after,
+  .desktop-nav__link:focus-visible::after,
+  .desktop-nav__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .desktop-nav__submenu {
+    display: grid;
+    width: 100%;
+    max-height: 0;
+    gap: 0.46rem;
+    margin-top: 0;
+    border-right: 1px solid rgb(255 255 255 / 36%);
+    padding-right: 0.82rem;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      max-height 220ms ease,
+      margin-top 220ms ease,
+      opacity 160ms ease,
+      visibility 160ms ease;
+  }
+
+  .desktop-nav__group:hover .desktop-nav__submenu,
+  .desktop-nav__group:focus-within .desktop-nav__submenu {
+    max-height: 9rem;
+    margin-top: 0.78rem;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .desktop-nav__submenu a {
+    position: relative;
+    justify-self: end;
+    padding: 0;
+    color: rgb(255 255 255 / 80%);
+    font-size: clamp(0.84rem, 0.88vw, 0.98rem);
+    font-weight: 430;
+    letter-spacing: 0.01em;
+    line-height: 1.18;
+    text-align: right;
+    transition:
+      color 160ms ease,
+      opacity 160ms ease;
+  }
+
+  .desktop-nav__submenu a::after {
+    position: absolute;
+    bottom: -0.22rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 200ms ease;
+  }
+
+  .desktop-nav__submenu a:hover,
+  .desktop-nav__submenu a:focus-visible {
+    color: var(--kc-white);
+    opacity: 1;
+  }
+
+  .desktop-nav__submenu a:hover::after,
+  .desktop-nav__submenu a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .header__cta {
+    display: none;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 0 1rem;
+    color: var(--kc-white);
+    background: var(--kc-navy);
+    font-size: 0.9rem;
+    font-weight: 650;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .header__cta:hover,
+  .header__cta:focus-visible {
+    background: var(--kc-royal);
+    transform: translateY(-1px);
+  }
+
+  .header__mobile {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .site-header {
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .desktop-nav,
+    .header__cta {
+      display: none;
+    }
+
+    .brand img {
+      width: 92px;
+    }
+
+    .header__mobile {
+      margin-left: auto;
+      display: block;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .header__bar {
+      width: calc(100% - 2rem);
+      min-height: 82px;
+      padding-top: 1.15rem;
+    }
+
+    .brand img {
+      width: 82px;
+    }
+  }
+</style>

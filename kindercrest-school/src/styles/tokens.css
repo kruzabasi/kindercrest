@@ -1,0 +1,26 @@
+:root {
+  --kc-navy: #071a46;
+  --kc-royal: #123e8a;
+  --kc-sky: #008fc7;
+  --kc-magenta: #ec008c;
+  --kc-green: #65b900;
+  --kc-gold: #ffc400;
+  --kc-orange: #f47a20;
+  --kc-ink: #101828;
+  --kc-muted: #667085;
+  --kc-line: #e4e7ec;
+  --kc-paper: #f7f8fa;
+  --kc-white: #ffffff;
+  --kc-warm: #fbfaf7;
+
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: Inter, 'Source Sans 3', Avenir, 'Helvetica Neue', Arial, sans-serif;
+
+  --shadow-soft: 0 18px 50px rgb(16 24 40 / 10%);
+  --shadow-small: 0 10px 26px rgb(16 24 40 / 8%);
+
+  --container: 1240px;
+  --gutter: clamp(0.875rem, 2.5vw, 1.5rem);
+  --radius: 8px;
+  --radius-small: 6px;
+}

@@ -1,0 +1,194 @@
+---
+import { heroSlides } from '../../data/site';
+
+const slideDuration = 6;
+const cycleDuration = heroSlides.length * slideDuration;
+const fallbackSlide = heroSlides[0];
+const heroStyle = [
+  `--hero-cycle: ${cycleDuration}s`,
+  `--hero-fallback-image: url('${fallbackSlide.image}')`,
+  `--hero-fallback-position: ${fallbackSlide.position}`
+].join('; ');
+---
+
+<section class="hero" id="home" aria-labelledby="hero-title" style={heroStyle}>
+  <div class="hero__slideshow" aria-hidden="true">
+    {
+      heroSlides.map((slide, index) => (
+        <div
+          class="hero__slide"
+          style={`--hero-delay: ${index === 0 ? 0 : -(heroSlides.length - index) * slideDuration}s;`}
+        >
+          <img
+            src={slide.image}
+            alt=""
+            width="2560"
+            height="1707"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            style={`object-position: ${slide.position};`}
+          />
+        </div>
+      ))
+    }
+  </div>
+  <div class="hero__shade" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <div class="hero__main">
+      <h1 id="hero-title">Creche, Preschool &amp; Primary</h1>
+      <p class="hero__meta">* Lifecamp Campus, Abuja. Established 2010</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: grid;
+    min-height: 100svh;
+    overflow: hidden;
+    color: var(--kc-white);
+    font-family: var(--font-body);
+    background: var(--kc-navy) var(--hero-fallback-image) var(--hero-fallback-position) / cover no-repeat;
+  }
+
+  .hero__slideshow,
+  .hero__slide,
+  .hero__shade {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__slide {
+    opacity: 0;
+    animation: hero-fade var(--hero-cycle) ease-in-out infinite both;
+    animation-delay: var(--hero-delay);
+  }
+
+  .hero__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: hero-zoom var(--hero-cycle) ease-in-out infinite both;
+    animation-delay: var(--hero-delay);
+  }
+
+  .hero__shade {
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 54%) 0%, rgb(0 0 0 / 30%) 46%, rgb(0 0 0 / 52%) 100%),
+      linear-gradient(180deg, rgb(0 0 0 / 22%) 0%, rgb(0 0 0 / 10%) 46%, rgb(0 0 0 / 54%) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(1920px, calc(100% - (clamp(1.4rem, 3.6vw, 5.6rem) * 2)));
+    min-height: 100svh;
+    align-items: end;
+    margin-inline: auto;
+    padding: clamp(8rem, 15vh, 12rem) 0 clamp(3.6rem, 8vh, 6rem);
+  }
+
+  .hero__main {
+    display: grid;
+    max-width: min(1100px, calc(100vw - 3rem));
+    gap: clamp(1rem, 2.2vw, 1.55rem);
+  }
+
+  .hero h1 {
+    max-width: 1120px;
+    margin: 0;
+    color: var(--kc-white);
+    font-family: var(--font-body);
+    font-size: clamp(4rem, 6.25vw, 8.4rem);
+    font-weight: 430;
+    letter-spacing: 0.08em;
+    line-height: 1.08;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .hero__meta {
+    margin: 0;
+    color: rgb(255 255 255 / 90%);
+    font-size: clamp(0.9rem, 1.15vw, 1.08rem);
+    font-weight: 430;
+    line-height: 1.35;
+  }
+
+  @keyframes hero-fade {
+    0%,
+    14% {
+      opacity: 1;
+    }
+
+    20%,
+    94% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-zoom {
+    0% {
+      transform: scale(1);
+    }
+
+    20%,
+    100% {
+      transform: scale(1.08);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero__shade {
+      background:
+        linear-gradient(90deg, rgb(0 0 0 / 58%) 0%, rgb(0 0 0 / 32%) 66%, rgb(0 0 0 / 38%) 100%),
+        linear-gradient(180deg, rgb(0 0 0 / 24%) 0%, rgb(0 0 0 / 14%) 45%, rgb(0 0 0 / 58%) 100%);
+    }
+
+    .hero__content {
+      width: min(100% - 2rem, 680px);
+      padding: 7.5rem 0 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.05rem, 13.5vw, 5.15rem);
+      letter-spacing: 0.055em;
+      line-height: 1.04;
+    }
+  }
+
+  @media (min-width: 901px) {
+    .hero__main {
+      max-width: min(1120px, calc(100vw - 24rem));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero__content {
+      padding-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.62rem, 13vw, 4.2rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide,
+    .hero__slide img {
+      animation: none;
+    }
+
+    .hero__slide:first-child {
+      opacity: 1;
+    }
+  }
+</style>
