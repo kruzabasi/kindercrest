@@ -33,7 +33,13 @@ export type FAQ = {
 export type SocialLink = {
   label: string;
   href: string;
-  icon: 'instagram';
+  icon: 'instagram' | 'facebook';
+};
+
+export type SchoolLocation = {
+  latitude: number;
+  longitude: number;
+  address: string;
 };
 
 export type FooterColumn = {
@@ -52,6 +58,7 @@ export const routes = {
 } as const;
 
 export const images = {
+  contactClassroom: '/assets/images/contact-classroom.jpg',
   outdoorPlay: '/assets/images/outdoor-play.jpg',
   playgroundLearning: '/assets/images/playground-learning.jpg',
   classroomActivity: '/assets/images/classroom-activity.jpg',
@@ -145,6 +152,19 @@ export const contact = {
   email: 'admin@kindercrestschool.com'
 };
 
+export const schoolLocations: SchoolLocation[] = [
+  {
+    latitude: 9.0796976,
+    longitude: 7.3806669,
+    address: contact.addressLines.join(', ')
+  },
+  {
+    latitude: 9.0847176,
+    longitude: 7.4130185,
+    address: '13 Dagash Street, Kado Estate, Abuja'
+  }
+];
+
 export const contactForm = {
   minWords: 12,
   maxWords: 180,
@@ -161,6 +181,11 @@ export const getMailtoHref = (subject?: string) =>
   subject ? `mailto:${contact.email}?subject=${encodeURIComponent(subject)}` : `mailto:${contact.email}`;
 
 export const socialLinks: SocialLink[] = [
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/people/Kindercrest-Preparatory-School/100061038626199/',
+    icon: 'facebook'
+  },
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/kindercrest?igsh=OXc3a295bzU2NGl5',
