@@ -1,3 +1,15 @@
+import classroomActivityImage from '../assets/images/classroom-activity.jpg';
+import classroomGroupLearningImage from '../assets/images/classroom-group-learning.jpg';
+import classroomStorytimeImage from '../assets/images/classroom-storytime.jpg';
+import contactClassroomImage from '../assets/images/contact-classroom.jpg';
+import creativeLearningImage from '../assets/images/creative-learning.jpg';
+import musicClassImage from '../assets/images/music-class.jpg';
+import outdoorPlayImage from '../assets/images/outdoor-play.jpg';
+import playgroundCarouselImage from '../assets/images/playground-carousel.jpg';
+import playgroundLearningImage from '../assets/images/playground-learning.jpg';
+import studentReadingImage from '../assets/images/student-reading.jpg';
+import violinPracticeImage from '../assets/images/violin-practice.jpg';
+
 export type NavItem = {
   label: string;
   href: string;
@@ -42,6 +54,11 @@ export type SchoolLocation = {
   address: string;
 };
 
+export type HeroSlide = {
+  image: ImageMetadata;
+  position: string;
+};
+
 export type FooterColumn = {
   title: string;
   links: NavItem[];
@@ -58,34 +75,63 @@ export const routes = {
 } as const;
 
 export const images = {
-  contactClassroom: '/assets/images/contact-classroom.jpg',
-  outdoorPlay: '/assets/images/outdoor-play.jpg',
-  playgroundLearning: '/assets/images/playground-learning.jpg',
-  classroomActivity: '/assets/images/classroom-activity.jpg',
-  musicClass: '/assets/images/music-class.jpg',
-  creativeLearning: '/assets/images/creative-learning.jpg'
+  contactClassroom: contactClassroomImage.src,
+  outdoorPlay: outdoorPlayImage.src,
+  playgroundLearning: playgroundLearningImage.src,
+  classroomActivity: classroomActivityImage.src,
+  musicClass: musicClassImage.src,
+  creativeLearning: creativeLearningImage.src,
+  studentReading: studentReadingImage.src,
+  classroomStorytime: classroomStorytimeImage.src,
+  classroomGroupLearning: classroomGroupLearningImage.src,
+  violinPractice: violinPracticeImage.src,
+  playgroundCarousel: playgroundCarouselImage.src
 } as const;
 
-export const heroSlides = [
+export const heroSlides: HeroSlide[] = [
   {
-    image: images.outdoorPlay,
+    image: outdoorPlayImage,
     position: 'center 38%'
   },
   {
-    image: images.playgroundLearning,
+    image: studentReadingImage,
+    position: 'center 38%'
+  },
+  {
+    image: playgroundLearningImage,
     position: 'center 42%'
   },
   {
-    image: images.classroomActivity,
+    image: classroomStorytimeImage,
+    position: 'center 46%'
+  },
+  {
+    image: classroomActivityImage,
     position: 'center 42%'
   },
   {
-    image: images.musicClass,
+    image: classroomGroupLearningImage,
+    position: 'center 46%'
+  },
+  {
+    image: musicClassImage,
     position: 'center 42%'
   },
   {
-    image: images.creativeLearning,
+    image: violinPracticeImage,
+    position: 'center 44%'
+  },
+  {
+    image: creativeLearningImage,
     position: 'center 42%'
+  },
+  {
+    image: playgroundCarouselImage,
+    position: 'center 48%'
+  },
+  {
+    image: contactClassroomImage,
+    position: 'center 50%'
   }
 ];
 
