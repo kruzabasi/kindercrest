@@ -1,11 +1,11 @@
 <section class="section welcome" id="about" aria-labelledby="welcome-title">
   <div class="container">
-    <div class="welcome__panel">
+    <div class="welcome__panel" data-reveal="ambient">
       <h2 class="welcome__title" id="welcome-title">
-        <span>Supporting Families</span>
-        <span>Since 2010</span>
+        <span data-reveal="title">Supporting Families</span>
+        <span data-reveal="title" data-reveal-delay="80">Since 2010</span>
       </h2>
-      <div class="welcome__body">
+      <div class="welcome__body" data-reveal="soft" data-reveal-delay="160">
         <p>
           Kindercrest School specializes in nurturing the potential of each child, offering two main
           sections: The Preschool, catering to Creche, Pre Nursery, Nursery 1 &amp; 2, and the Primary
@@ -44,7 +44,15 @@
     background: url('/assets/logo/kclogo.png') center / contain no-repeat;
     opacity: 0.082;
     transform: translate(-50%, -47%);
+    transition:
+      opacity 900ms var(--reveal-ease),
+      transform 900ms var(--reveal-ease);
     pointer-events: none;
+  }
+
+  :global(.has-js) :global([data-reveal-root]) .welcome__panel[data-reveal='ambient']:not(.is-revealed)::before {
+    opacity: 0.02;
+    transform: translate(-50%, -47%) scale(0.98);
   }
 
   .welcome__panel > * {

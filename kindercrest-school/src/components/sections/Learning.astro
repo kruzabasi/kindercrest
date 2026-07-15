@@ -5,9 +5,12 @@ import { programmes } from '../../data/site';
 <section class="learning" id="learning" aria-labelledby="learning-title">
   <div class="container learning__shell">
     <div class="learning__intro">
-      <p class="learning__eyebrow">Learning at Kindercrest</p>
-      <h2 id="learning-title">A steady path from early care to confident learning.</h2>
-      <p>
+      <span class="learning__marker" aria-hidden="true" data-reveal="line-y"></span>
+      <p class="learning__eyebrow" data-reveal="soft" data-reveal-delay="40">Learning at Kindercrest</p>
+      <h2 id="learning-title" data-reveal="soft" data-reveal-delay="100">
+        A steady path from early care to confident learning.
+      </h2>
+      <p data-reveal="soft" data-reveal-delay="180">
         From attentive early care to confident grade school learning, each stage is designed around safety,
         rhythm, discovery, and strong foundations.
       </p>
@@ -15,8 +18,12 @@ import { programmes } from '../../data/site';
 
     <div class="programme-list" aria-label="Kindercrest learning stages">
       {
-        programmes.map((programme) => (
-          <article class:list={['programme-card', `programme-card--${programme.accent}`]}>
+        programmes.map((programme, index) => (
+          <article
+            class:list={['programme-card', `programme-card--${programme.accent}`]}
+            data-reveal="card"
+            data-reveal-delay={index === 0 ? '120' : '0'}
+          >
             <div class="programme-card__media">
               <img
                 src={programme.image}
@@ -69,7 +76,7 @@ import { programmes } from '../../data/site';
     padding-left: 1.45rem;
   }
 
-  .learning__intro::before {
+  .learning__marker {
     position: absolute;
     top: 0.1rem;
     left: 0;
@@ -85,7 +92,6 @@ import { programmes } from '../../data/site';
         var(--kc-magenta) 58% 80%,
         var(--kc-orange) 80% 100%
       );
-    content: '';
     box-shadow: 0 0 0 5px rgb(255 255 255 / 82%);
   }
 
@@ -263,7 +269,7 @@ import { programmes } from '../../data/site';
       padding-left: 1rem;
     }
 
-    .learning__intro::before {
+    .learning__marker {
       width: 0.25rem;
       height: 3.1rem;
     }

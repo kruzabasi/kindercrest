@@ -7,7 +7,7 @@ const questionTopics = ['Progress', 'Safety', 'Admissions', 'Learning support'];
 
 <section class="faq" id="faq" aria-labelledby="faq-title">
   <div class="container faq__shell">
-    <div class="faq__intro">
+    <div class="faq__intro" data-reveal="soft">
       <p class="faq__eyebrow">Parent Questions</p>
       <h2 id="faq-title">Questions families ask before visiting.</h2>
       <p>
@@ -28,7 +28,7 @@ const questionTopics = ['Progress', 'Safety', 'Admissions', 'Learning support'];
       </ul>
     </div>
 
-    <div class="faq__questions">
+    <div class="faq__questions" data-reveal="right" data-reveal-delay="80">
       <FAQAccordion faqs={faqs} client:visible />
     </div>
   </div>

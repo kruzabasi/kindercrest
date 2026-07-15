@@ -5,8 +5,8 @@ import { valueCards } from '../../data/site';
 <section class="values" id="values" aria-labelledby="values-title">
   <div class="container values__shell">
     <div class="values__intro">
-      <h2 id="values-title">Why Kindercrest?</h2>
-      <p>
+      <h2 id="values-title" data-reveal="left">Why Kindercrest?</h2>
+      <p data-reveal="soft" data-reveal-delay="90">
         Kindercrest School stands out as an exceptional choice for early childhood education, providing a
         nurturing and purposeful environment where all members of the school community can inspire,
         imagine, believe and achieve.
@@ -15,8 +15,12 @@ import { valueCards } from '../../data/site';
 
     <div class="values__grid" aria-label="Why Kindercrest reasons">
       {
-        valueCards.map((value) => (
-          <article class:list={['value-item', `value-item--${value.accent}`]}>
+        valueCards.map((value, index) => (
+          <article
+            class:list={['value-item', `value-item--${value.accent}`]}
+            data-reveal="scale"
+            data-reveal-delay={String(index * 90)}
+          >
             {
               value.illustration && (
                 <div class="value-item__illustration" aria-hidden="true">

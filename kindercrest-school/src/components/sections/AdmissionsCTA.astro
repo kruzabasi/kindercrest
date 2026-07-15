@@ -4,11 +4,11 @@ import Icon from '../ui/Icon.astro';
 ---
 
 <section class="admissions" id="admissions" aria-labelledby="admissions-title">
-  <div class="container admissions__grid">
-    <div>
+  <div class="container admissions__grid" data-reveal="rules">
+    <div data-reveal="left" data-reveal-delay="90">
       <h2 class="section-title" id="admissions-title">We welcome students all year round.</h2>
     </div>
-    <div class="admissions__copy">
+    <div class="admissions__copy" data-reveal="right" data-reveal-delay="170">
       <p>
         Book a school tour or trial day to experience Kindercrest firsthand.
       </p>
@@ -30,13 +30,39 @@ import Icon from '../ui/Icon.astro';
   }
 
   .admissions__grid {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.42fr);
     gap: clamp(1.5rem, 5vw, 4rem);
     align-items: center;
-    border-top: 1px solid var(--kc-line);
-    border-bottom: 1px solid var(--kc-line);
     padding-block: clamp(2rem, 4vw, 3rem);
+  }
+
+  .admissions__grid::before,
+  .admissions__grid::after {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 1px;
+    transform: scaleX(1);
+    transform-origin: left;
+    background: var(--kc-line);
+    content: '';
+    transition: transform 720ms var(--reveal-ease);
+  }
+
+  .admissions__grid::before {
+    top: 0;
+  }
+
+  .admissions__grid::after {
+    bottom: 0;
+    transition-delay: 90ms;
+  }
+
+  :global(.has-js) :global([data-reveal-root]) .admissions__grid[data-reveal='rules']:not(.is-revealed)::before,
+  :global(.has-js) :global([data-reveal-root]) .admissions__grid[data-reveal='rules']:not(.is-revealed)::after {
+    transform: scaleX(0);
   }
 
   .admissions .section-title {

@@ -1,0 +1,81 @@
+:root {
+  --reveal-duration: 640ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal-root] [data-reveal] {
+  --reveal-delay: 0ms;
+}
+
+.has-js [data-reveal-root] [data-reveal='soft'],
+.has-js [data-reveal-root] [data-reveal='title'],
+.has-js [data-reveal-root] [data-reveal='left'],
+.has-js [data-reveal-root] [data-reveal='right'],
+.has-js [data-reveal-root] [data-reveal='scale'],
+.has-js [data-reveal-root] [data-reveal='card'] {
+  opacity: 0;
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease) var(--reveal-delay),
+    transform var(--reveal-duration) var(--reveal-ease) var(--reveal-delay);
+  will-change: opacity, transform;
+}
+
+.has-js [data-reveal-root] [data-reveal='soft'],
+.has-js [data-reveal-root] [data-reveal='title'] {
+  transform: translateY(16px);
+}
+
+.has-js [data-reveal-root] [data-reveal='title'] {
+  transform: translateY(0.24em);
+}
+
+.has-js [data-reveal-root] [data-reveal='left'] {
+  transform: translateX(-18px);
+}
+
+.has-js [data-reveal-root] [data-reveal='right'] {
+  transform: translateX(18px);
+}
+
+.has-js [data-reveal-root] [data-reveal='scale'] {
+  transform: translateY(16px) scale(0.985);
+}
+
+.has-js [data-reveal-root] [data-reveal='card'] {
+  transform: translateY(22px) scale(0.992);
+}
+
+.has-js [data-reveal-root] [data-reveal='line-y'] {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 720ms var(--reveal-ease) var(--reveal-delay);
+}
+
+.has-js [data-reveal-root] [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (max-width: 620px) {
+  :root {
+    --reveal-duration: 560ms;
+  }
+
+  .has-js [data-reveal-root] [data-reveal='left'],
+  .has-js [data-reveal-root] [data-reveal='right'] {
+    transform: translateY(14px);
+  }
+
+  .has-js [data-reveal-root] [data-reveal='card'] {
+    transform: translateY(18px) scale(0.995);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .has-js [data-reveal-root] [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

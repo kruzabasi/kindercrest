@@ -12,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout>
   <Header />
-  <main id="main-content">
+  <main id="main-content" data-reveal-root>
     <Hero />
     <Welcome />
     <Learning />
@@ -22,3 +22,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  import { initializeScrollReveals } from '../scripts/scroll-reveal';
+
+  initializeScrollReveals();
+</script>
