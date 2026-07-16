@@ -1,5 +1,5 @@
 ---
-import { getMailtoHref, mailSubjects } from '../../data/site';
+import { routes } from '../../data/site';
 import Icon from '../ui/Icon.astro';
 ---
 
@@ -13,7 +13,7 @@ import Icon from '../ui/Icon.astro';
         Book a school tour or trial day to experience Kindercrest firsthand.
       </p>
       <div class="admissions__actions">
-        <a class="button button--primary" href={getMailtoHref(mailSubjects.admissions)}>
+        <a class="button button--primary" href={routes.admissions}>
           Book Your Visit
           <Icon name="arrow" />
         </a>

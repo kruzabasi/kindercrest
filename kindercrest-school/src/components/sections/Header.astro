@@ -3,9 +3,10 @@ import MobileMenu from '../islands/MobileMenu.svelte';
 import { contact, navGroups, routes } from '../../data/site';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isContactPage = currentPath === routes.contact;
-const isActiveNavItem = (href: string, index: number) => (isContactPage ? href === routes.contact : index === 0);
-const activeHref = isContactPage ? routes.contact : routes.home;
+const routePath = (href: string) => href.split('#')[0].replace(/\/$/, '') || '/';
+const isActiveNavItem = (href: string) =>
+  currentPath === routes.home ? href === routes.home : routePath(href) === currentPath;
+const activeHref = navGroups.find((item) => isActiveNavItem(item.href))?.href ?? routes.home;
 ---
 
 <header class="site-header" aria-label="Site header">
@@ -17,9 +18,9 @@ const activeHref = isContactPage ? routes.contact : routes.home;
 
     <nav class="desktop-nav" aria-label="Primary navigation">
       {
-        navGroups.map((item, index) => (
+        navGroups.map((item) => (
           <div class="desktop-nav__group">
-            <a class:list={{ 'desktop-nav__link': true, 'is-active': isActiveNavItem(item.href, index) }} href={item.href}>
+            <a class:list={{ 'desktop-nav__link': true, 'is-active': isActiveNavItem(item.href) }} href={item.href}>
               {item.label}
             </a>
             {

@@ -1,0 +1,283 @@
+---
+import Footer from '../components/sections/Footer.astro';
+import Header from '../components/sections/Header.astro';
+import Icon from '../components/ui/Icon.astro';
+import { contact, getMailtoHref, images, mailSubjects } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const admissionsHeroStyle = `--admissions-hero-image: url('${images.classroomGroupLearning}');`;
+const admissionsMailto = getMailtoHref(mailSubjects.admissions, contact.admissionsEmail);
+---
+
+<BaseLayout
+  title="Admissions | Kindercrest School"
+  description="Learn about admissions at Kindercrest School in Abuja and contact our admissions team to arrange a conversation or school visit."
+>
+  <Header />
+  <main id="main-content">
+    <section class="admissions-hero" aria-labelledby="admissions-title" style={admissionsHeroStyle}>
+      <div class="admissions-hero__inner">
+        <h1 id="admissions-title">Admissions</h1>
+      </div>
+    </section>
+
+    <section class="admissions-intro" aria-label="Admissions introduction">
+      <div class="admissions-intro__inner">
+        <p>We are pleased that you are considering Kindercrest for your family.</p>
+      </div>
+    </section>
+
+    <section class="admissions-content" aria-labelledby="admissions-welcome-title">
+      <div class="admissions-content__inner">
+        <article class="admissions-copy">
+          <p class="admissions-eyebrow">Joining Kindercrest</p>
+          <h2 id="admissions-welcome-title">A thoughtful start for every family</h2>
+          <div class="admissions-copy__body">
+            <p>
+              Our Admissions Team is here to listen, answer your questions, and guide you through the next steps. We
+              will help you understand our Creche, Early Years, and Grade School programmes and find the right starting
+              point for your child.
+            </p>
+            <p>
+              Contact us to learn more about Kindercrest, discuss your child’s needs, or arrange a school visit. We look
+              forward to meeting your family and beginning this journey together.
+            </p>
+          </div>
+        </article>
+
+        <aside class="admissions-card" aria-label="Contact the admissions team">
+          <p class="admissions-card__eyebrow">Start a conversation</p>
+          <h2>Speak with our Admissions Team</h2>
+          <p>
+            Tell us your child’s age and the programme you are considering. Our team will respond with the relevant
+            next steps.
+          </p>
+          <a class="admissions-card__cta" href={admissionsMailto}>
+            <span>{contact.admissionsEmail}</span>
+            <Icon name="arrow" />
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .admissions-hero {
+    position: relative;
+    display: grid;
+    min-height: 100svh;
+    overflow: hidden;
+    color: var(--kc-white);
+    font-family: var(--font-body);
+    background-color: var(--kc-navy);
+    background-image:
+      linear-gradient(90deg, rgb(0 0 0 / 48%) 0%, rgb(0 0 0 / 24%) 52%, rgb(0 0 0 / 48%) 100%),
+      linear-gradient(180deg, rgb(0 0 0 / 12%) 0%, rgb(0 0 0 / 14%) 48%, rgb(0 0 0 / 58%) 100%),
+      var(--admissions-hero-image);
+    background-position:
+      center,
+      center,
+      center 46%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .admissions-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: min(1920px, calc(100% - (clamp(1.4rem, 3.6vw, 5.6rem) * 2)));
+    min-height: 100svh;
+    place-items: end start;
+    margin-inline: auto;
+    padding: clamp(8rem, 15vh, 12rem) 0 clamp(3.6rem, 8vh, 6rem);
+  }
+
+  .admissions-hero h1 {
+    margin: 0;
+    color: var(--kc-white);
+    font-size: clamp(4.2rem, 9vw, 11.5rem);
+    font-weight: 430;
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .admissions-intro {
+    padding-block: clamp(3.6rem, 6vw, 5.8rem);
+    color: var(--kc-ink);
+    background: var(--kc-white);
+  }
+
+  .admissions-intro__inner,
+  .admissions-content__inner {
+    width: min(1680px, calc(100% - (clamp(1.4rem, 4vw, 4rem) * 2)));
+    margin-inline: auto;
+  }
+
+  .admissions-intro p {
+    max-width: 1120px;
+    margin: 0;
+    color: var(--kc-ink);
+    font-size: clamp(2rem, 3.35vw, 4.1rem);
+    font-weight: 430;
+    letter-spacing: 0;
+    line-height: 1.13;
+    text-wrap: balance;
+  }
+
+  .admissions-content {
+    padding-block: clamp(4rem, 7vw, 7rem);
+    color: var(--kc-ink);
+    background: linear-gradient(180deg, var(--kc-warm) 0%, var(--kc-warm) 72%, var(--kc-white) 100%);
+  }
+
+  .admissions-content__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.62fr);
+    gap: clamp(3rem, 8vw, 8rem);
+    align-items: start;
+  }
+
+  .admissions-copy,
+  .admissions-card {
+    display: grid;
+    align-content: start;
+  }
+
+  .admissions-copy {
+    gap: clamp(1.4rem, 2.6vw, 2.2rem);
+  }
+
+  .admissions-eyebrow,
+  .admissions-card__eyebrow {
+    margin: 0;
+    color: var(--kc-sky);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .admissions-copy h2,
+  .admissions-card h2 {
+    margin: 0;
+    color: var(--kc-navy);
+    font-weight: 430;
+    letter-spacing: 0;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .admissions-copy h2 {
+    max-width: 820px;
+    font-size: clamp(2.7rem, 5.2vw, 5.7rem);
+  }
+
+  .admissions-copy__body {
+    display: grid;
+    max-width: 790px;
+    gap: 1.2rem;
+  }
+
+  .admissions-copy__body p,
+  .admissions-card > p:not(.admissions-card__eyebrow) {
+    margin: 0;
+    color: var(--kc-muted);
+    font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+    line-height: 1.65;
+  }
+
+  .admissions-card {
+    gap: 1.35rem;
+    border-left: 3px solid var(--kc-sky);
+    padding: clamp(2rem, 3.5vw, 3.25rem);
+    background: color-mix(in srgb, var(--kc-white) 88%, transparent);
+  }
+
+  .admissions-card h2 {
+    font-size: clamp(2.1rem, 3.4vw, 3.7rem);
+  }
+
+  .admissions-card__cta {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 3.4rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.45rem;
+    border: 1px solid var(--kc-navy);
+    padding: 0.95rem 1.2rem;
+    color: var(--kc-white);
+    background: var(--kc-navy);
+    font-size: clamp(0.84rem, 1.1vw, 1rem);
+    font-weight: 760;
+    line-height: 1.15;
+    text-align: center;
+    transition:
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .admissions-card__cta:hover,
+  .admissions-card__cta:focus-visible {
+    background: var(--kc-royal);
+    transform: translateY(-1px);
+  }
+
+  .admissions-card__cta span {
+    overflow-wrap: anywhere;
+  }
+
+  .admissions-card__cta :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .admissions-hero__inner,
+    .admissions-intro__inner,
+    .admissions-content__inner {
+      width: min(100% - 2rem, 680px);
+    }
+
+    .admissions-hero__inner {
+      min-height: 100svh;
+      padding: 7.5rem 0 3.5rem;
+    }
+
+    .admissions-hero h1 {
+      font-size: clamp(2.5rem, 13.5vw, 6.5rem);
+      letter-spacing: 0.035em;
+    }
+
+    .admissions-intro p {
+      font-size: clamp(2rem, 8vw, 3.25rem);
+    }
+
+    .admissions-content__inner {
+      grid-template-columns: 1fr;
+      gap: 3.25rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .admissions-content {
+      padding-block: 3.25rem 4rem;
+    }
+
+    .admissions-card {
+      padding: 1.65rem 1.35rem;
+    }
+
+    .admissions-card__cta {
+      width: 100%;
+    }
+  }
+</style>

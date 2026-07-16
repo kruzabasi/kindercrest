@@ -70,7 +70,7 @@ export const routes = {
   values: '/#values',
   faq: '/#faq',
   learning: '/#learning',
-  admissions: '/#admissions',
+  admissions: '/admissions',
   contact: '/contact'
 } as const;
 
@@ -195,7 +195,8 @@ export const contact = {
   tagline: 'Learning for life and learning through community',
   addressLines: ['2 R.S Tahir Street, Lifecamp', 'Abuja'],
   phones: ['08183275414', '08099067444'],
-  email: 'admin@kindercrestschool.com'
+  email: 'admin@kindercrestschool.com',
+  admissionsEmail: 'admissions@kindercrestschool.com'
 };
 
 export const schoolLocations: SchoolLocation[] = [
@@ -223,8 +224,8 @@ export const mailSubjects = {
   parentQuestion: 'Kindercrest Parent Question'
 } as const;
 
-export const getMailtoHref = (subject?: string) =>
-  subject ? `mailto:${contact.email}?subject=${encodeURIComponent(subject)}` : `mailto:${contact.email}`;
+export const getMailtoHref = (subject?: string, recipient = contact.email) =>
+  subject ? `mailto:${recipient}?subject=${encodeURIComponent(subject)}` : `mailto:${recipient}`;
 
 export const socialLinks: SocialLink[] = [
   {
